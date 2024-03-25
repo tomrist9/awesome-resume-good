@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-your-best-resume" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-your-resume" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-your-resume/awesome-resume" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-your-resume/build-your-resume" vcs="Git" />
   </component>
 </project>

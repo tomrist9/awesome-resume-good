@@ -15,6 +15,7 @@ public class Main {
       user.setId(2);
         user.setName("Nazrin");
         userDao.updateUser(user);
+        System.out.println("Successfully updated");
 
     }
 }
