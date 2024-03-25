@@ -17,8 +17,10 @@ ext {
     junitVersion = '5.9.2'
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
+compileJava {
+    sourceCompatibility = '11' // Or specify a version supported by your JDK
+    targetCompatibility = '11' // Same as sourceCompatibility or lower
+}
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -38,6 +40,11 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'mysql:mysql-connector-java:8.0.28' // Add this line for MySQL connector
+        // other dependencies...
+
 }
 
 test {
