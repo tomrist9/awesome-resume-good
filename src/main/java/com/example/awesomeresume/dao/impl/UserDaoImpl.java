@@ -69,7 +69,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            System.out.println("updated");
+
             return false;
 
         }
