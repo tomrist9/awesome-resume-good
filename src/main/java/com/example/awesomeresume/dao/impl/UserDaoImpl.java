@@ -9,12 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
+
+    private User getUser(ResultSet resultSet) throws Exception {
+     int id = resultSet.getInt("id");
+     String name= resultSet.getString("name");
+     String surname= resultSet.getString("surname");
+     String phone= resultSet.getString("phone");
+     String email= resultSet.getString("email");
+     int nationalityId=resultSet.getInt("nationality_id");
+     int birthplaceId=resultSet.getInt("birthplace_id");
+     String nationalityStr= resultSet.getString("nationality");
+     String birthPlaceStr= resultSet.getString("birthplace");
+
+     Date birthdate=resultSet.getDate("birthdate");
+     Country nationality= new Country(nationalityId, null,
+             nationalityStr);
+     Country birthplace=new Country(birthplaceId, birthPlaceStr, null);
+
+     return new User(id, name, surname, phone, email, birthdate, nationality, birthplace);
+    }
+
     @Override
     public List<User> getAll() {
         List<User> result = new ArrayList<>();
 
-        try {
-            Connection connection = connect();
+        try( Connection connection = connect()) {
+
             Statement stmt = connection.createStatement();
             stmt.execute("select * from user");
             ResultSet resultSet = stmt.getResultSet();
@@ -36,6 +56,42 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         }
         return result;
 
+    }
+    @Override
+    public User getById(int userId){
+        User result=null;
+        try(Connection connection=connect()){
+            Statement statement=connection.createStatement();
+            statement.execute("select "
+            +"u.*,"
+            +"n.nationality as nationality,"
+            +"c.name as birthplace"
+            +"from user u"
+            +"left join country  n on u.nationality.id=id"
+            + "left join on country c on u.birthplace_id=id where u.id="+userId);
+            ResultSet resultSet=statement.getResultSet();
+
+            while(resultSet.next()){
+                result=getUser(resultSet);
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return result;
+    }
+@Override
+    public boolean addUser(User u){
+        try(Connection connection=connect()){
+            PreparedStatement statement= connect().prepareStatement("insert into user(name, surname, phone, email, profilDescription, address, birthdate, birthplace_id, nationality_id)");
+            statement.setString(1, u.getName());
+            statement.setString(2, u.getSurname());
+            statement.setString(3, u.getPhone());
+            statement.setString(4, u.getEmail());
+            return statement.execute();
+        }catch (Exception exception){
+            exception.printStackTrace();
+            return false;
+        }
     }
 
     @Override

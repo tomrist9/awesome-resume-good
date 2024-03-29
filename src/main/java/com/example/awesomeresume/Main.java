@@ -11,11 +11,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         UserDaoInter userDao = new UserDaoImpl();
-      User user= new User();
-      user.setId(2);
-        user.setName("Nazrin");
-        userDao.updateUser(user);
-        System.out.println("Successfully updated");
+      User user= new User(0, "Tomris", "Teymurlu", "0514316592", "tomris.tlu@mail.ru");
+     userDao.addUser(user);
 
     }
 }
