@@ -1,4 +1,4 @@
-package com.example.awesomeresume.bean;
+package com.example.awesomeresume.entity;
 
 public class Skill {
     private int id;

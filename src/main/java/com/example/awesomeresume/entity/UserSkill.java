@@ -1,12 +1,12 @@
-package com.example.awesomeresume.bean;
+package com.example.awesomeresume.entity;
 
 public class UserSkill {
-    private int id;
+    private Integer id;
     private User user;
     private Skill skill;
     private int power;
 
-    public UserSkill(int id, User user, Skill skill, int power) {
+    public UserSkill(Integer id, User user, Skill skill, int power) {
         this.id = id;
         this.user = user;
         this.skill = skill;
@@ -20,7 +20,7 @@ public class UserSkill {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,5 +46,15 @@ public class UserSkill {
 
     public void setPower(int power) {
         this.power = power;
+    }
+
+    @Override
+    public String toString() {
+        return "UserSkill{" +
+                "id=" + id +
+                ", user=" + user +
+                ", skill=" + skill +
+                ", power=" + power +
+                '}';
     }
 }

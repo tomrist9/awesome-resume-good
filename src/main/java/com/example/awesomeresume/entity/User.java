@@ -1,4 +1,4 @@
-package com.example.awesomeresume.bean;
+package com.example.awesomeresume.entity;
 
 import java.sql.Date;
 import java.util.List;
@@ -23,6 +23,9 @@ public class User {
     }
 
     public User(int id, String name, String surname, String phone, String email, Date birthdate, Country nationality, Country birthplace) {
+    }
+
+    public User(int id) {
     }
 
     public int getId() {

@@ -1,7 +1,5 @@
 package com.example.awesomeresume.dao.inter;
 
-import com.example.awesomeresume.bean.User;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

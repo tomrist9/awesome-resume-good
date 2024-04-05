@@ -1,18 +1,15 @@
 package com.example.awesomeresume;
 
-import com.example.awesomeresume.bean.User;
+import com.example.awesomeresume.dao.inter.UserSkillDaoInter;
+import com.example.awesomeresume.entity.User;
 import com.example.awesomeresume.dao.impl.UserDaoImpl;
 import com.example.awesomeresume.dao.inter.UserDaoInter;
 
-import java.sql.*;
-import java.util.List;
-
-public class Main {
+public class Main extends javax.swing.JFrame{
 
     public static void main(String[] args) throws Exception {
-        UserDaoInter userDao = new UserDaoImpl();
-      User user= new User(0, "Tomris", "Teymurlu", "0514316592", "tomris.tlu@mail.ru");
-     userDao.addUser(user);
+        UserSkillDaoInter userSkillDao = Context.instanceUserSkillDao();
+        System.out.println(userSkillDao.getAllSkillByUserId(6));
 
     }
 }

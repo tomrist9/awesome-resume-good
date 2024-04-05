@@ -1,6 +1,7 @@
 package com.example.awesomeresume.dao.impl;
 
-import com.example.awesomeresume.bean.User;
+import com.example.awesomeresume.entity.Country;
+import com.example.awesomeresume.entity.User;
 import com.example.awesomeresume.dao.inter.AbstractDAO;
 import com.example.awesomeresume.dao.inter.UserDaoInter;
 
@@ -28,6 +29,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
 
      return new User(id, name, surname, phone, email, birthdate, nationality, birthplace);
     }
+
 
     @Override
     public List<User> getAll() {
@@ -57,18 +59,35 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         return result;
 
     }
+
+
+@Override
+    public void addUser(User u){
+        try(Connection connection=connect()){
+            PreparedStatement statement= connect().prepareStatement("insert into user(name, surname, phone, email, profilDescription, address, birthdate, birthplace_id, nationality_id)");
+            statement.setString(1, u.getName());
+            statement.setString(2, u.getSurname());
+            statement.setString(3, u.getPhone());
+            statement.setString(4, u.getEmail());
+            statement.execute();
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+    }
+
+
     @Override
-    public User getById(int userId){
+    public User getById(int id) {
         User result=null;
         try(Connection connection=connect()){
             Statement statement=connection.createStatement();
             statement.execute("select "
-            +"u.*,"
-            +"n.nationality as nationality,"
-            +"c.name as birthplace"
-            +"from user u"
-            +"left join country  n on u.nationality.id=id"
-            + "left join on country c on u.birthplace_id=id where u.id="+userId);
+                    +"u.*,"
+                    +"n.nationality as nationality,"
+                    +"c.name as birthplace"
+                    +"from user u"
+                    +"left join country  n on u.nationality.id=id"
+                    + "left join on country c on u.birthplace_id=id where u.id="+id);
             ResultSet resultSet=statement.getResultSet();
 
             while(resultSet.next()){
@@ -78,20 +97,6 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
             exception.printStackTrace();
         }
         return result;
-    }
-@Override
-    public boolean addUser(User u){
-        try(Connection connection=connect()){
-            PreparedStatement statement= connect().prepareStatement("insert into user(name, surname, phone, email, profilDescription, address, birthdate, birthplace_id, nationality_id)");
-            statement.setString(1, u.getName());
-            statement.setString(2, u.getSurname());
-            statement.setString(3, u.getPhone());
-            statement.setString(4, u.getEmail());
-            return statement.execute();
-        }catch (Exception exception){
-            exception.printStackTrace();
-            return false;
-        }
     }
 
     @Override
