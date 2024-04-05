@@ -1,11 +1,15 @@
 package com.example.awesomeresume.bean;
 
+import java.sql.Date;
+import java.util.List;
+
 public class User {
     private int id;
     private String name;
     private String surname;
     private String phone;
     private String email;
+    private List<UserSkill> skills;
 
     public User() {
     }
@@ -16,6 +20,9 @@ public class User {
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+    }
+
+    public User(int id, String name, String surname, String phone, String email, Date birthdate, Country nationality, Country birthplace) {
     }
 
     public int getId() {
@@ -56,6 +63,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<UserSkill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<UserSkill> skills) {
+        this.skills = skills;
     }
 
     @Override
